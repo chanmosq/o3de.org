@@ -6,8 +6,7 @@ on: pull_request
 jobs:
   get_changed_files:
     outputs:
-      changed_files: 
-        value: ${{ steps.changes.outputs.FILES }}
+      changed_files: ${{ steps.changes.outputs.FILES }}
     runs-on: ubuntu-latest    
     steps: 
       - uses: actions/checkout@v2
