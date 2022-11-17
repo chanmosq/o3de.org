@@ -14,10 +14,13 @@ jobs:
           fetch-depth: 0
       - name: Get changed files
         id: changes
-        run: echo "FILES=$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }})" >> $GITHUB_OUTPUT
+        run: echo "FILES=$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | xargs)" >> $GITHUB_OUTPUT
         #run: echo "base_ref ${{ github.event.pull_request.base.sha }} sha ${{ github.sha }})" >> $GITHUB_OUTPUT
       - name: Print changed files
         run: echo ${{ steps.changes.outputs.FILES}}
+      #- name: 
+      #  run: echo "${{ github.event.pull_request.commits }}""
+
   vale:
     name: Run vale
     runs-on: ubuntu-latest
