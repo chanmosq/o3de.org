@@ -4,15 +4,18 @@ name: reviewdog
 on: pull_request
 
 jobs:
-  changed_files:
+  get_changed_files:
+    outputs:
+      changed_files: 
+        value: ${{ steps.changes.outputs.FILES }}
     runs-on: ubuntu-latest    
     steps: 
       - uses: actions/checkout@v2
       - name: Get changed files
         id: changes
-        run: echo "FILES=$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | xargs)" >> $GITHUB_OUTPUT
+        run: echo "FILES=$(git diff --name-only --diff-filter=ACMRT ${{ github.base_ref.sha }} ${{ github.sha }} | xargs)" >> $GITHUB_OUTPUT
       - name: Print changed files
-        run: echo ${{ steps.changes.output.FILES}}
+        run: echo ${{ steps.changes.outputs.FILES}}
   vale:
     name: Run vale
     runs-on: ubuntu-latest
