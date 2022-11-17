@@ -15,10 +15,10 @@ jobs:
           fetch-depth: 0
       - name: Get changed files
         id: changes
-        run: echo "FILES=$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | xargs)" >> $GITHUB_OUTPUT
+        run: echo "FILES=$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | paste -s -d,)" >> $GITHUB_OUTPUT
         #run: echo "base_ref ${{ github.event.pull_request.base.sha }} sha ${{ github.sha }})" >> $GITHUB_OUTPUT
       - name: Print changed files
-        run: echo ${{ steps.changes.outputs.FILES}}
+        run: echo '${{ needs.get_changed_files.outputs.changed_files }}'
 
   vale:
     name: Run vale
@@ -31,6 +31,6 @@ jobs:
           # Required, set by GitHub actions automatically:
           # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        with:
-          files: '${{ needs.get_changed_files.outputs.changed_files }}'
-          separator: " "
+        with:          
+          files: ${{ needs.get_changed_files.outputs.changed_files }}
+          
