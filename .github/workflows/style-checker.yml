@@ -32,5 +32,5 @@ jobs:
           # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
-          files: ${{ jobs.get_changed_files.outputs.changed_files }}
+          files: ${{ needs.get_changed_files.outputs.changed_files }}
           separator: " "
