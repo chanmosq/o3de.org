@@ -6,6 +6,7 @@ on: pull_request
 jobs:
   get_changed_files:
     outputs:
+      # Returns a space-delimited string of file names 
       changed_files: ${{ steps.changes.outputs.FILES }}
     runs-on: ubuntu-latest    
     steps: 
@@ -18,8 +19,6 @@ jobs:
         #run: echo "base_ref ${{ github.event.pull_request.base.sha }} sha ${{ github.sha }})" >> $GITHUB_OUTPUT
       - name: Print changed files
         run: echo ${{ steps.changes.outputs.FILES}}
-      #- name: 
-      #  run: echo "${{ github.event.pull_request.commits }}""
 
   vale:
     name: Run vale
@@ -33,4 +32,6 @@ jobs:
           # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
-          files: needs.changed_files.output.all
+          files: jobs.get_changed_files.outputs.changed_files
+            with:
+              separator: " "
