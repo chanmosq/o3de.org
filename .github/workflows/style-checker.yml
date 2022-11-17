@@ -33,5 +33,4 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
           files: jobs.get_changed_files.outputs.changed_files
-            with:
-              separator: " "
+          separator: " "
