@@ -13,7 +13,7 @@ jobs:
       - name: Get changed files
         id: changes
         #run: echo "FILES=$(git diff --name-only --diff-filter=ACMRT ${{ github.base_ref.sha }} ${{ github.sha }})" >> $GITHUB_OUTPUT
-        run: echo "base_ref.sha ${{ github.base_ref.sha }} ;sha ${{ github.sha }})" >> $GITHUB_OUTPUT
+        run: echo "base_ref.sha ${{ github.event.pull_request.base.sha }} ;sha ${{ github.sha }})" >> $GITHUB_OUTPUT
       - name: Print changed files
         run: echo ${{ steps.changes.outputs.FILES}}
   vale:
