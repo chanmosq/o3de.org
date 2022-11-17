@@ -12,8 +12,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Get changed files
         id: changes
-        run: echo "FILES=$(git diff --name-only --diff-filter=ACMRT ${{ github.base_ref.sha }} ${{ github.sha }})" >> $GITHUB_OUTPUT
-        #run: echo "FILES=$(($RANDOM % 2))" >> $GITHUB_OUTPUT
+        #run: echo "FILES=$(git diff --name-only --diff-filter=ACMRT ${{ github.base_ref.sha }} ${{ github.sha }})" >> $GITHUB_OUTPUT
+        run: echo "base_ref.sha: ${{ github.base_ref.sha }} ;sha: ${{ github.sha }})" >> $GITHUB_OUTPUT
       - name: Print changed files
         run: echo ${{ steps.changes.outputs.FILES}}
   vale:
