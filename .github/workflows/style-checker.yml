@@ -25,7 +25,7 @@ jobs:
     needs: get_changed_files
     steps:
       - uses: actions/checkout@v2
-      - uses: errata-ai/vale-action@vreviewdog
+      - uses: errata-ai/vale-action@reviewdog
         env:
           # Required, set by GitHub actions automatically:
           # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret
