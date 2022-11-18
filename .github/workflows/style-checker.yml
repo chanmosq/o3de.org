@@ -15,7 +15,11 @@ jobs:
           fetch-depth: 0
       - name: Get changed files
         id: changes      
-        run: echo "FILES='[\"$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | sed -z 's/\n/", "/g' )\"]'"
+        run: |
+          beg='["'
+          mid=$(echo "$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | sed -z 's/\n/", "/g'))
+          end='"]'
+          echo "FILES=$beg$mid$end" >> $GITHUB_OUTPUT
       - name: Print changed files
         run: echo ${{ steps.changes.outputs.FILES}}
 
