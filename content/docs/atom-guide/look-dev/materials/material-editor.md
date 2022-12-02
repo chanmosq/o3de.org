@@ -6,38 +6,36 @@ toc: true
 
 The **Material Editor** is a standalone application that allows artists to view, edit, and create new materials. This section introduces the Material Editor and describes the editor layout and its individual panels.
 
+  ![Material Editor](/images/atom-guide/materials/material-editor.jpg)
+
 ## Quick Start
 To get started, launch the Material Editor and create or edit a material. 
 
-#### Launch the Material Editor
-You can launch the Material Editor from the **Open 3D Engine (O3DE)** Editor, or as a standalone application:   
+1. **Launch the Material Editor**  
+  You can launch the Material Editor from the **Open 3D Engine (O3DE) Editor**, or as a standalone application:   
+     - From the O3DE Editor, you can launch Material Editor in either two ways.
+       
+       - Select **Main Menu > Tools > Material Editor**.
+       
+       - From a Material component in the Inspector, select **Edit Material in Material Editor...** in the hamburger menu of a material assignment slot.
 
-- From the O3DE Editor, you can launch Material Editor in two ways.
-  
-  - Select **Main Menu > Tools > Material Editor**.
-  
-  - From a Material component in the Inspector, select **Edit Material in Material Editor...** in the hamburger menu of a material assignment slot.
+     - As a standalone application, launch the executable `<build>\bin\profile\MaterialEditor.exe`.
 
-- As a standalone application, launch the executable `<build>\bin\profile\MaterialEditor.exe`.
+2. **Create or edit a material**  
+  You can create a new material or edit an existing material from the File menu in the Material Editor, or from the Context menu in the Asset Browser: 
+    - From the File menu in the Material Editor:
+      
+      - To create a new material, choose **New** and choose a material type for the new material.
+      
+      - To open an existing material, choose **Open...** or **Open Recent**, and select an existing material.
 
-#### Create or edit a material
-You can create a new material or edit an existing material from the File menu in the Material Editor, or from the Context menu in the Asset Browser: 
-
-- From the File menu in the Material Editor:
-  
-  - To create a new material, choose **New** and choose a material type for the new material.
-  
-  - To open an existing material, choose **Open...** or **Open Recent**, and select an existing material.
-
-- From the Context menu in the Asset Browser:
-  
-  1. Select a `.material` file.
- 
-  2. Then, right-click the `.material` file to open the context menu.
-  
-  3. Choose **Open in Material Editor...** to open the material in the Material Editor.
-
-![Material Editor](/images/atom-guide/materials/material-editor.jpg)
+    - From the Context menu in the Asset Browser:
+      
+      1. Select a `.material` file.
+    
+      2. Then, right-click the `.material` file to open the context menu.
+      
+      3. Choose **Open in Material Editor...** to open the material in the Material Editor.
 
 ## Title bar
 The title bar of the main window displays which rendering backend is being used (DX12 or Vulkan).
@@ -106,8 +104,10 @@ The Viewport cannot be closed entirely. If all the tabs are closed, the Viewport
 ### Interacting with the Viewport
 You can view your material in the Viewport in different perspectives by moving the camera, model, or lighting environment.
 
-#### Camera Controls
-These controls adjust the camera view.
+#### Camera controls
+
+Adjusts the camera view.
+
 | Control | Action |
 | - | - |
 | **LMB+Drag**, **RMB+Drag** | Tumble the camera around a pivot or point of interest. |
@@ -115,15 +115,17 @@ These controls adjust the camera view.
 | **MMB+Drag** | Track the camera left, right, up, and down in the direction of mouse movement. |
 | **Z** | Reset camera view. |
 
-#### Model and Lighting Controls
-These controls adjust the model and lighting within the current camera view. 
+#### Model and Lighting controls
+
+Adjust the model and lighting within the current camera view. 
+
 | Control | Action |
 | - | - |
 | **Ctrl+LMB+Drag** | Tumble the model. |
 | **Shift+LMB+Drag** | Rotate the lighting environment horizontally around the model. |
 
-#### Industry-standard Controls
-Industry-standard controls to orbit, zoom, and pan in the Viewport. 
+#### Industry-standard controls
+
 | Control | Action |
 | - | - |
 | **Alt+LMB+Drag** | Tumble the camera around a pivot or point of interest. |
