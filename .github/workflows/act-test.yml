@@ -1,0 +1,27 @@
+name: nektos-act-test
+on: pull_request
+
+jobs:
+  get_sha:
+    runs-on: ubuntu-latest    
+    steps:
+      - name: Get value of github.sha
+        id: step_get_sha
+        run: |
+              echo "GitHub SHA: ${{ github.sha }}"
+  get_pr_base_sha:
+    runs-on: ubuntu-latest    
+    steps:
+      - name: Get value of github.event.pull_request.base.sha
+        id: step_get_pr_base_sha
+        run: |
+              echo "GitHub Base Ref SHA: ${{ github.base_ref }}"
+  get_event_payload:
+    name: Print event payload
+    runs-on: ubuntu-latest
+    steps:
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: |
+        echo "$GITHUB_CONTEXT"
