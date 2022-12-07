@@ -15,13 +15,14 @@ jobs:
       - name: Get value of github.event.pull_request.base.sha
         id: step_get_pr_base_sha
         run: |
-              echo "GitHub Base Ref SHA: ${{ github.base_ref }}"
-  get_event_payload:
-    name: Print event payload
+              echo "GitHub Base Ref SHA: ${{ github.event_name }}"
+
+  printJob:    
+    name: Print event
     runs-on: ubuntu-latest
     steps:
     - name: Dump GitHub context
       env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
+        GITHUB_CONTEXT: ${{ toJson(github.event) }}
       run: |
         echo "$GITHUB_CONTEXT"
