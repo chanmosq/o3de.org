@@ -26,10 +26,10 @@ jobs:
 
   run_vale:
     runs-on: ubuntu-latest  # windows-latest | macos-latest
+    needs: get_changed_files    
     steps:
     - name: Run vale if any file(s) in the docs folder change
       if: steps.changed-files-specific.outputs.any_changed == 'true'
-      needs: get_changed_files    
       uses: errata-ai/vale-action@reviewdog
       env:
         # Required, set by GitHub actions automatically:
