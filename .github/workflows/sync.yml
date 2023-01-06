@@ -10,7 +10,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
-          node-version: latest
+          node-version: 12
       - name: Open pull request
         uses: tretuna/sync-branches@1.4.0
         with:
