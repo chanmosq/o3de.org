@@ -11,7 +11,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Create a branch
-        run: git switch -c sync-development-${{steps.date.outputs.NOW}} origin/main
+        run: git switch -c sync-development-${{steps.date.outputs.NOW}} main
       - name: Create a PR to development
-        run: gh pr create --base origin/development --title "Sync main to development"
+        run: gh pr create --base development --title "Sync main to development"
       
