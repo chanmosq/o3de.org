@@ -6,11 +6,7 @@ jobs:
     name: Syncing main to development
     steps:       
       - name: Checkout development branch
-        uses: actions/checkout@v3
-        with: 
-          ref: development
-      - name: Pull main into development
-        run: git merge origin/main
+        uses: actions/checkout@v3        
       - name: Create a PR
         uses: peter-evans/create-pull-request@v3
         with:
@@ -20,5 +16,6 @@ jobs:
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: true
           branch: sync-to-development
+          base: development
           delete-branch: true
           title: Sync main to development
