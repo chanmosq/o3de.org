@@ -15,9 +15,9 @@ jobs:
       - name: Create a branch
         run: git switch -c sync-to-development
       - name: Create a PR to development
-        uses: thomaseizinger/create-pull-request@1.0.0
+        uses: devops-infra/action-pull-request@v0.5.3
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          head: sync-to-development
-          base: development
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          source_branch: sync-to-development
+          target_branch: development
           title: Sync development into main
