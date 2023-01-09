@@ -4,12 +4,14 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     name: Syncing main to development
-    steps: 
-      - name: Checkout Repository
+    steps:       
+      - name: Get date and time
+        id: date
+        run: echo "NOW=$(date +'%Y%m%d-%k%M')"
+      - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Open pull request
-        uses: repo-sync/pull-request@v2
-        with:
-          source_branch: "main"
-          destination_branch: "development"
-          pr_title: "Synching main to development"
+      - name: Create a branch
+        run: git switch -c sync-development-${{steps.date.outputs.NOW}} origin/main
+      - name: Create a PR to development
+        run: gh pr create --base origin/development --title "Sync main to development"
+      
