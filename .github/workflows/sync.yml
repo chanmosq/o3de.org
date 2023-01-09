@@ -5,19 +5,20 @@ jobs:
     runs-on: ubuntu-latest
     name: Syncing main to development
     steps:       
-      - name: Get date and time
-        id: date        
-        run: echo "NOW=$(date +'%Y%m%d-%k%M')"
-      - name: Checkout main branch
+      - name: Checkout development branch
         uses: actions/checkout@v3
         with: 
-          ref: main
-      - name: Create a branch
-        run: git switch -c sync-to-development
-      - name: Create a PR to development
-        uses: devops-infra/action-pull-request@v0.5.3
+          ref: origin/development
+      - name: Pull main into development
+        run: git merge origin/main
+      - name: Create a PR
+        uses: peter-evans/create-pull-request@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: sync-to-development
-          target_branch: development
-          title: Sync development into main
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Add report file
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          signoff: true
+          branch: sync-to-development
+          delete-branch: true
+          title: Sync main to development
