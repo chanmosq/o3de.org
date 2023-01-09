@@ -8,7 +8,7 @@ jobs:
       - name: Checkout development branch
         uses: actions/checkout@v3
         with: 
-          ref: origin/development
+          ref: development
       - name: Pull main into development
         run: git merge origin/main
       - name: Create a PR
