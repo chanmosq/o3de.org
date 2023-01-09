@@ -5,10 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Syncing main to development
     steps:       
-        env: 
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}`
       - name: Get date and time
-        id: date
+        id: date        
         run: echo "NOW=$(date +'%Y%m%d-%k%M')"
       - name: Checkout main branch
         uses: actions/checkout@v3
