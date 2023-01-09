@@ -5,14 +5,21 @@ jobs:
     runs-on: ubuntu-latest
     name: Syncing main to development
     steps:       
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}`
       - name: Get date and time
         id: date
         run: echo "NOW=$(date +'%Y%m%d-%k%M')"
-      - name: Checkout repository
+      - name: Checkout main branch
         uses: actions/checkout@v3
-        env: 
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}`
+        with: 
+          ref: main
       - name: Create a branch
-        run: git switch -c sync-development origin/main
+        run: git switch -c sync-to-development
       - name: Create a PR to development
-        run: gh pr create --base origin/development --title "Sync main to development"
+        uses: thomaseizinger/create-pull-request@1.0.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          head: sync-to-development
+          base: development
+          title: Sync development into main
