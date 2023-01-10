@@ -10,7 +10,9 @@ jobs:
         with:
           ref: development
       - name: Merge main into development
-        run: git merge origin main
+        run: | 
+          git config pull.rebase false
+          git pull origin main
       - name: Create a PR
         uses: peter-evans/create-pull-request@v3
         with:
