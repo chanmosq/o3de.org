@@ -22,3 +22,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           FROM_BRANCH: "main"
           TO_BRANCH: "development"
+          PULL_REQUEST_TITLE: (Auto) Sync main-to-development
+          PULL_REQUEST_BODY: |
+            This is an automatically generated PR to sync `main` to `development`.
+          CONTENT_COMPARISON: true
