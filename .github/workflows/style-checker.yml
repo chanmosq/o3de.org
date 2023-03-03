@@ -1,0 +1,40 @@
+# Source: https://github.com/marketplace/actions/vale-linter?version=v2.0.1
+
+name: reviewdog
+on: pull_request
+
+jobs:
+  get_changed_files:
+    outputs:
+      # Returns a space-delimited string of file names 
+      changed_files: ${{ steps.changes.outputs.FILES }}
+    runs-on: ubuntu-latest    
+    steps: 
+      - uses: actions/checkout@v2
+        with: 
+          fetch-depth: 0
+      - name: Get changed files
+        id: changes      
+        run: |
+          beg='["'
+          mid=$(echo $(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | sed -z 's/\n/", "/g'))
+          end='"]'
+          echo "FILES=$beg$mid$end" >> $GITHUB_OUTPUT
+      - name: Print changed files
+        run: echo ${{ steps.changes.outputs.FILES}}
+
+  vale:
+    name: Run vale
+    runs-on: ubuntu-latest
+    needs: get_changed_files
+    steps:
+      - uses: actions/checkout@v2
+      - uses: errata-ai/vale-action@reviewdog
+        env:
+          # Required, set by GitHub actions automatically:
+          # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:          
+          files: '${{ needs.get_changed_files.outputs.changed_files }}'
+          
+          
